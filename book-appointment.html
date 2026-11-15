@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment - Bayaw</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="modal-overlay" id="customModal">
+        <div class="modal-box" style="max-width: 450px;">
+            <div style="text-align: center; margin-bottom: 15px;">
+                <i class="fa-solid fa-circle-check" style="font-size: 40px; color: #10B981;"></i>
+                <h3 style="margin-top: 10px;">Booking Confirmed!</h3>
+                <p style="margin-bottom: 15px;">Please screenshot this receipt.</p>
+            </div>
+            <div class="receipt-container">
+                <div class="receipt-row"><span class="receipt-label">Booking ID:</span><span class="receipt-value" id="rcptId">#APT-0000</span></div>
+                <div class="receipt-row"><span class="receipt-label">Mechanic:</span><span class="receipt-value" id="rcptMech">Any Available</span></div>
+                <div class="receipt-row"><span class="receipt-label">Service:</span><span class="receipt-value" id="rcptService">General Repair</span></div>
+                <div class="receipt-row"><span class="receipt-label">Date:</span><span class="receipt-value" id="rcptDate">2026-11-15</span></div>
+                <div class="receipt-row"><span class="receipt-label">Time:</span><span class="receipt-value" id="rcptTime">10:00 AM</span></div>
+            </div>
+            <div class="modal-actions"><button class="btn-primary" onclick="window.location.href='dashboard.html'">Back to Home</button></div>
+        </div>
+    </div>
+
+    <div class="mobile-header"><img src="images/logo.png" style="height: 35px;"><button class="menu-toggle" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button></div>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="logo"><img src="images/logo.png" alt="Bayaw Motorshop"></div>
+            <ul class="nav-menu">
+                <li><a href="dashboard.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="motor-parts.html"><i class="fa-solid fa-gear"></i> Motor Parts</a></li>
+                <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i> My Cart <span class="cart-badge" id="cartCount">0</span></a></li>
+                <li><a href="orders.html"><i class="fa-solid fa-box"></i> My Orders</a></li>
+                <li><a href="book-appointment.html" class="active"><i class="fa-regular fa-calendar-check"></i> Book Appointment</a></li>
+                <li><a href="mechanics.html"><i class="fa-solid fa-wrench"></i> Mechanics</a></li>
+                <li><a href="inventory.html"><i class="fa-solid fa-boxes-stacked"></i> Inventory</a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact Us</a></li>
+            </ul>
+            <div class="user-section">
+                <div class="user-profile"><div class="avatar"><i class="fa-solid fa-user"></i></div><div><h4></h4><p>Customer</p></div></div>
+                <button class="logout-btn" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header"><h1>Book a Repair Appointment</h1><p>Schedule your motorcycle repair service</p></div>
+            <div class="layout-two-col">
+                <div>
+                    <form id="appointmentForm">
+                        <div class="form-group"><label>Select Mechanic</label><select id="inputMech" required><option value="Any Available Mechanic">Any Available Mechanic</option><option value="Yuri Orolaza">Yuri Orolaza</option><option value="Ronald Allan Oba">Ronald Allan Oba</option><option value="Ian Jerome Abad">Ian Jerome Abad</option><option value="Khurt Espinili">Khurt Espinili</option></select></div>
+                        <div class="form-group"><label>Service Type</label><select id="inputService" required><option value="General Repair">General Repair</option><option value="Oil Change">Oil Change</option><option value="Tune-up">Tune-up</option></select></div>
+                        <div class="form-group"><label>Preferred Date</label><input type="date" id="inputDate" required></div>
+                        <div class="form-group"><label>Preferred Time</label><select id="inputTime" required><option value="8:00 AM">8:00 AM</option><option value="10:00 AM">10:00 AM</option><option value="1:00 PM">1:00 PM</option><option value="3:00 PM">3:00 PM</option></select></div>
+                        <div class="form-group"><label>Notes (optional)</label><textarea placeholder="Tell us more about the issue"></textarea></div>
+                        <button type="submit" class="btn-primary">Book Appointment</button>
+                    </form>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1599819811279-d5ad9cccf838?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" style="width: 100%; border-radius: 16px; object-fit: cover; height: 250px; margin-bottom: 20px;">
+                    <div class="services-list"><h3>Common Services</h3><ul><li>Tune-up</li><li>Brake Service</li><li>Oil Change</li><li>Chain & Sprocket</li><li>Electrical Check</li><li>General Repair</li></ul></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="dashboard.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
+        <a href="motor-parts.html"><i class="fa-solid fa-gear"></i><span>Shop</span></a>
+        <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i><span>Cart</span></a>
+        <a href="orders.html"><i class="fa-solid fa-box"></i><span>Orders</span></a>
+        <a href="book-appointment.html" class="active"><i class="fa-regular fa-calendar-check"></i><span>Book</span></a>
+        <a href="mechanics.html"><i class="fa-solid fa-wrench"></i><span>Mech</span></a>
+        <a href="inventory.html"><i class="fa-solid fa-boxes-stacked"></i><span>Inv</span></a>
+        <a href="contact.html"><i class="fa-solid fa-envelope"></i><span>Contact</span></a>
+    </nav>
+
+    <script>
+        function toggleMenu() { document.getElementById('sidebar').classList.toggle('active'); }
+        function updateCartBadge() { const cart = JSON.parse(localStorage.getItem('bayawCart')) || []; document.querySelectorAll('.cart-badge').forEach(b => b.innerText = cart.reduce((sum, item) => sum + item.qty, 0)); }
+        
+        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let mech = document.getElementById('inputMech').value;
+            let service = document.getElementById('inputService').value;
+            let date = document.getElementById('inputDate').value;
+            let time = document.getElementById('inputTime').value;
+            let bookingId = "APT-" + Math.floor(1000 + Math.random() * 9000);
+            
+            // I-save sa localStorage
+            let appts = JSON.parse(localStorage.getItem('bayawAppointments')) || [];
+            appts.push({ id: bookingId, mech: mech, service: service, date: date, time: time });
+            localStorage.setItem('bayawAppointments', JSON.stringify(appts));
+            
+            // Ipakita sa resibo
+            document.getElementById('rcptId').innerText = bookingId;
+            document.getElementById('rcptMech').innerText = mech;
+            document.getElementById('rcptService').innerText = service;
+            document.getElementById('rcptDate').innerText = date;
+            document.getElementById('rcptTime').innerText = time;
+            
+            document.getElementById('customModal').classList.add('active');
+            this.reset();
+        });
+        
+        updateCartBadge();
+    </script>
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motor Parts - Bayaw</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="modal-overlay" id="customModal">
+        <div class="modal-box"><h3 id="modalTitle">Title</h3><p id="modalMessage">Message</p><div class="modal-actions"><button class="btn-outline" id="modalBtnNo" onclick="closeModal()">No</button><button class="btn-primary" id="modalBtnYes">Yes</button></div></div>
+    </div>
+
+    <div class="mobile-header">
+        <img src="images/logo.png" style="height: 35px;" alt="Logo">
+        <button class="menu-toggle" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
+    </div>
+
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="logo"><img src="images/logo.png" alt="Bayaw Motorshop"></div>
+            <ul class="nav-menu">
+                <li><a href="dashboard.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="motor-parts.html" class="active"><i class="fa-solid fa-gear"></i> Motor Parts</a></li>
+                <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i> My Cart <span class="cart-badge" id="cartCount">0</span></a></li>
+                <li><a href="orders.html"><i class="fa-solid fa-box"></i> My Orders</a></li>
+                <li><a href="book-appointment.html"><i class="fa-regular fa-calendar-check"></i> Book Appointment</a></li>
+                <li><a href="mechanics.html"><i class="fa-solid fa-wrench"></i> Mechanics</a></li>
+                <li><a href="inventory.html"><i class="fa-solid fa-boxes-stacked"></i> Inventory</a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact Us</a></li>
+            </ul>
+            <div class="user-section">
+                <div class="user-profile"><div class="avatar"><i class="fa-solid fa-user"></i></div><div><h4></h4><p>Customer</p></div></div>
+                <button class="logout-btn" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header"><h1>Motor Parts</h1><p>Find the right parts for your motorcycle</p></div>
+            
+            <div style="display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
+                <div class="search-bar" style="margin-bottom: 0; flex-grow: 1;">
+                    <input type="text" id="partSearch" placeholder="Search parts..." onkeyup="searchParts()">
+                    <button><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+                </div>
+                <!-- IDINAGDAG ANG onchange="sortProducts()" DITO -->
+                <select id="sortSelect" onchange="sortProducts()" style="padding: 15px; border-radius: 10px; border: 1.5px solid var(--border-color); font-weight: 600; outline: none; cursor: pointer;">
+                    <option value="popular">Sort by: Popular</option>
+                    <option value="low-high">Price: Low to High</option>
+                    <option value="high-low">Price: High to Low</option>
+                </select>
+            </div>
+
+            <div class="layout-two-col">
+                <div class="category-list">
+                    <div class="category-btn active" onclick="filterParts('all', this)">All</div>
+                    <div class="category-btn" onclick="filterParts('accessories', this)">Accessories</div>
+                    <div class="category-btn" onclick="filterParts('brake', this)">Brake System</div>
+                    <div class="category-btn" onclick="filterParts('engine', this)">Engine</div>
+                    <div class="category-btn" onclick="filterParts('transmission', this)">Transmission</div>
+                    <div class="category-btn" onclick="filterParts('suspension', this)">Suspension</div>
+                    <div class="category-btn" onclick="filterParts('tires', this)">Tires</div>
+                    <div class="category-btn" onclick="filterParts('mags', this)">Mags</div>
+                </div>
+
+                <div>
+                    <div class="product-grid" id="partsGrid">
+                        <!-- ACCESSORIES -->
+                        <!-- NILAGYAN NG data-price ANG BAWAT ISA -->
+                        <div class="product-card" data-category="accessories" data-price="3500">
+                            <div class="brand-badge">TRC</div>
+                            <img src="images/TRCswingarm.jpg" alt="TRC Swing Arm">
+                            <div class="product-info"><h4>TRC Swing Arm</h4><div class="rating">⭐ 4.8 <span>(120)</span></div><div class="price-container"><span class="price">₱3500</span></div>
+                                <button class="btn-add-cart" onclick="addToCart('A1', 'TRC Swing Arm', 3500, 'images/TRCswingarm.jpg')">Add to Cart</button>
+                                <button class="btn-buy-now" onclick="buyNow('A1', 'TRC Swing Arm', 3500, 'images/TRCswingarm.jpg')">Buy Now</button>
+                            </div>
+                        </div>
+                        <div class="product-card" data-category="accessories" data-price="2500">
+                            <div class="brand-badge">UMA</div>
+                            <img src="images/UMARadiator.png" alt="UMA Radiator">
+                            <div class="product-info"><h4>UMA Radiator</h4><div class="rating">⭐ 4.5 <span>(85)</span></div><div class="price-container"><span class="price">₱2500</span></div>
+                                <button class="btn-add-cart" onclick="addToCart('A2', 'UMA Radiator', 2500, 'images/UMARadiator.png')">Add to Cart</button>
+                                <button class="btn-buy-now" onclick="buyNow('A2', 'UMA Radiator', 2500, 'images/UMAradiator.png')">Buy Now</button>
+                            </div>
+                        </div>
+                        <div class="product-card" data-category="accessories" data-price="1500">
+                            <div class="brand-badge">BOM X</div>
+                            <img src="images/bomxdualtankbrakemaster.webp" alt="Bom X Brake Master">
+                            <div class="product-info"><h4>Bom X Dual Tank Brake Master</h4><div class="rating">⭐ 4.6 <span>(42)</span></div><div class="price-container"><span class="price">₱1500</span></div>
+                                <button class="btn-add-cart" onclick="addToCart('A3', 'Bom X Dual Tank Brake Master', 1500, 'images/bomxdualtankbrakemaster.webp')">Add to Cart</button>
+                                <button class="btn-buy-now" onclick="buyNow('A3', 'Bom X Dual Tank Brake Master', 1500, 'images/bomxdualtankbrakemaster.webp')">Buy Now</button>
+                            </div>
+                        </div>
+
+                        <!-- BRAKE SYSTEM -->
+                        <div class="product-card" data-category="brake" data-price="450">
+                            <div class="discount-badge">-10%</div>
+                            <div class="brand-badge">TRC</div>
+                            <img src="images/TRCbrakepads.jpg" alt="TRC Brake Pads">
+                            <div class="product-info"><h4>TRC Brake Pads</h4><div class="rating">⭐ 4.9 <span>(200)</span></div><div class="price-container"><span class="price">₱450</span><span class="original-price">₱500</span></div>
+                                <button class="btn-add-cart" onclick="addToCart('B1', 'TRC Brake Pads', 450, 'images/TRCbrakepads.jpg')">Add to Cart</button>
+                                <button class="btn-buy-now" onclick="buyNow('B1', 'TRC Brake Pads', 450, 'images/TRCbrakepads.jpg')">Buy Now</button>
+                            </div>
+                        </div>
+                        <div class="product-card" data-category="brake" data-price="2500">
+                            <div class="brand-badge">TRC</div>
+                            <img src="images/TRCdiscbrake.webp" alt="TRC Disc Brake">
+                            <div class="product-info"><h4>TRC Disc Brake</h4><div class="rating">⭐ 4.7 <span>(110)</span></div><div class="price-container"><span class="price">₱2500</span></div>
+                                <button class="btn-add-cart" onclick="addToCart('B2', 'TRC Disc Brake', 2500, 'images/TRCdiscbrake.webp')">Add to Cart</button>
+                                <button class="btn-buy-now" onclick="buyNow('B2', 'TRC Disc Brake', 2500, 'images/TRCdiscbrake.webp')">Buy Now</button>
+                            </div>
+                        </div>
+                        <div class="product-card" data-category="brake" data-price="250">
+                            <img src="images/brakefluid.webp" alt="Brake Fluid">
+                            <div class="product-info"><h4>Brake Fluid</h4><div class="rating">⭐ 4.8 <span>(300)</span></div><div class="price-container"><span class="price">₱250</span></div>
+                                <button class="btn-add-cart" onclick="addToCart('B3', 'Brake Fluid', 250, 'images/brakefluid.webp')">Add to Cart</button>
+                                <button class="btn-buy-now" onclick="buyNow('B3', 'Brake Fluid', 250, 'images/brakefluid.webp')">Buy Now</button>
+                            </div>
+                        </div>
+                        <div class="product-card" data-category="brake" data-price="1200">
+                            <div class="brand-badge">TRC</div>
+                            <img src="images/TRCbrakemaster.webp" alt="TRC Brake Master">
+                            <div class="product-info"><h4>TRC Brake Master</h4><div class="rating">⭐ 4.6 <span>(75)</span></div><div class="price-container"><span class="price">₱1200</span></div>
+                                <button class="btn-add-cart" onclick="addToCart('B4', 'TRC Brake Master', 1200, 'images/TRCbrakemaster.webp')">Add to Cart</button>
+                                <button class="btn-buy-now" onclick="buyNow('B4', 'TRC Brake Master', 1200, 'images/TRCbrakemaster.webp')">Buy Now</button>
+                            </div>
+                        </div>
+                        <div class="product-card" data-category="brake" data-price="1800">
+                            <div class="discount-badge">-15%</div>
+                            <div class="brand-badge">TRC</div>
+                            <img src="images/trcbrakemasterwithoiltank.webp" alt="TRC Brake Master w/ Oil Tank">
+                            <div class="product-info"><h4>TRC Brake Master w/ Oil Tank</h4><div class="rating">⭐ 4.9 <span>(60)</span></div><div class="price-container"><span class="price">₱1800</span><span class="original-price">₱2100</span></div>
+                                <button class="btn-add-cart" onclick="addToCart('B5', 'TRC Brake Master w/ Oil Tank', 1800, 'images/trcbrakemasterwithoiltank.webp')">Add to Cart</button>
+                                <button class="btn-buy-now" onclick="buyNow('B5', 'TRC Brake Master w/ Oil Tank', 1800, 'images/trcbrakemasterwithoiltank.webp')">Buy Now</button>
+                            </div>
+                        </div>
+
+                        <!-- ENGINE -->
+                        <div class="product-card" data-category="engine" data-price="200">
+                            <div class="brand-badge">NGK</div>
+                            <img src="images/sparkplug.jpeg" alt="Spark Plug">
+                            <div class="product-info"><h4>Spark Plug</h4><div class="rating">⭐ 4.8 <span>(500)</span></div><div class="price-container"><span class="price">₱200</span></div>
+                                <button class="btn-add-cart" onclick="addToCart('E1', 'Spark Plug', 200, 'images/sparkplug.jpeg')">Add to Cart</button>
+                                <button class="btn-buy-now" onclick="buyNow('E1', 'Spark Plug', 200, 'images/sparkplug.jpeg')">Buy Now</button>
+                            </div>
+                        </div>
+                        <div class="product-card" data-category="engine" data-price="300">
+                            <img src="images/gasketcylinderhead.webp" alt="Gasket Cylinder Head">
+                            <div class="product-info"><h4>Gasket Cylinder Head</h4><div class="rating">⭐ 4.5 <span>(30)</span></div><div class="price-container"><span class="price">₱300</span></div>
+                                <button class="btn-add-cart" onclick="addToCart('E2', 'Gasket Cylinder Head', 300, 'images/gasketcylinderhead.webp')">Add to Cart</button>
+                                <button class="btn-buy-now" onclick="buyNow('E2', 'Gasket Cylinder Head', 300, 'images/gasketcylinderhead.webp')">Buy Now</button>
+                            </div>
+                        </div>
+                        <div class="product-card" data-category="engine" data-price="850">
+                            <div class="brand-badge">OEM</div>
+                            <img src="images/pistonforwave110.webp" alt="Piston">
+                            <div class="product-info"><h4>Piston Wave 110</h4><div class="rating">⭐ 4.7 <span>(40)</span></div><div class="price-container"><span class="price">₱850</span></div>
+                                <button class="btn-add-cart" onclick="addToCart('E3', 'Piston Wave 110', 850, 'images/pistonforwave110.webp')">Add to Cart</button>
+                                <button class="btn-buy-now" onclick="buyNow('E3', 'Piston Wave 110', 850, 'images/pistonforwave110.webp')">Buy Now</button>
+                            </div>
+                        </div>
+
+                        <!-- TRANSMISSION -->
+                        <div class="product-card" data-category="transmission" data-price="600">
+                            <div class="brand-badge">YAMAHA</div>
+                            <img src="images/chainyamaha.webp" alt="Yamaha Chain">
+                            <div class="product-info"><h4>Yamaha Chain</h4><div class="rating">⭐ 4.9 <span>(150)</span></div><div class="price-container"><span class="price">₱600</span></div>
+                                <button class="btn-add-cart" onclick="addToCart('T1', 'Yamaha Chain', 600, 'images/chainyamaha.webp')">Add to Cart</button>
+                                <button class="btn-buy-now" onclick="buyNow('T1', 'Yamaha Chain', 600, 'images/chainyamaha.webp')">Buy Now</button>
+                            </div>
+                        </div>
+                        <div class="product-card" data-category="transmission" data-price="350">
+                            <img src="images/gearlever.webp" alt="Gear Lever">
+                            <div class="product-info"><h4>Gear Lever</h4><div class="rating">⭐ 4.4 <span>(20)</span></div><div class="price-container"><span class="price">₱350</span></div>
+                                <button class="btn-add-cart" onclick="addToCart('T2', 'Gear Lever', 350, 'images/gearlever.webp')">Add to Cart</button>
+                                <button class="btn-buy-now" onclick="buyNow('T2', 'Gear Lever', 350, 'images/gearlever.webp')">Buy Now</button>
+                            </div>
+                        </div>
+
+                        <!-- SUSPENSION -->
+                        <div class="product-card" data-category="suspension" data-price="3200">
+                            <div class="discount-badge">-20%</div>
+                            <div class="brand-badge">TRC</div>
+                            <img src="images/trcrearshock.webp" alt="TRC Rear Shock">
+                            <div class="product-info"><h4>TRC Rear Shock</h4><div class="rating">⭐ 4.8 <span>(120)</span></div><div class="price-container"><span class="price">₱3200</span><span class="original-price">₱4000</span></div>
+                                <button class="btn-add-cart" onclick="addToCart('S1', 'TRC Rear Shock', 3200, 'images/trcrearshock.webp')">Add to Cart</button>
+                                <button class="btn-buy-now" onclick="buyNow('S1', 'TRC Rear Shock', 3200, 'images/trcrearshock.webp')">Buy Now</button>
+                            </div>
+                        </div>
+                        <div class="product-card" data-category="suspension" data-price="3800">
+                            <div class="brand-badge">BOM X</div>
+                            <img src="images/bomxshock.webp" alt="Bom X Shock">
+                            <div class="product-info"><h4>Bom X Shock</h4><div class="rating">⭐ 4.6 <span>(45)</span></div><div class="price-container"><span class="price">₱3800</span></div>
+                                <button class="btn-add-cart" onclick="addToCart('S2', 'Bom X Shock', 3800, 'images/bomxshock.webp')">Add to Cart</button>
+                                <button class="btn-buy-now" onclick="buyNow('S2', 'Bom X Shock', 3800, 'images/bomxshock.webp')">Buy Now</button>
+                            </div>
+                        </div>
+                        <div class="product-card" data-category="suspension" data-price="4500">
+                            <div class="brand-badge">RCB</div>
+                            <img src="images/RCBSP800.jpg" alt="RCB SP800">
+                            <div class="product-info"><h4>RCB SP800</h4><div class="rating">⭐ 4.9 <span>(210)</span></div><div class="price-container"><span class="price">₱4500</span></div>
+                                <button class="btn-add-cart" onclick="addToCart('S3', 'RCB SP800', 4500, 'images/RCBSP800.jpg')">Add to Cart</button>
+                                <button class="btn-buy-now" onclick="buyNow('S3', 'RCB SP800', 4500, 'images/RCBSP800.jpg')">Buy Now</button>
+                            </div>
+                        </div>
+
+                        <!-- TIRES -->
+                        <div class="product-card" data-category="tires" data-price="2800">
+                            <div class="brand-badge">MICHELIN</div>
+                            <img src="images/michelintires.webp" alt="Michelin Tires">
+                            <div class="product-info"><h4>Michelin Tires</h4><div class="rating">⭐ 4.8 <span>(180)</span></div><div class="price-container"><span class="price">₱2800</span></div>
+                                <button class="btn-add-cart" onclick="addToCart('R1', 'Michelin Tires', 2800, 'images/michelintires.webp')">Add to Cart</button>
+                                <button class="btn-buy-now" onclick="buyNow('R1', 'Michelin Tires', 2800, 'images/michelintires.webp')">Buy Now</button>
+                            </div>
+                        </div>
+
+                        <!-- MAGS -->
+                        <div class="product-card" data-category="mags" data-price="5500">
+                            <div class="discount-badge">-10%</div>
+                            <div class="brand-badge">TRC</div>
+                            <img src="images/TRCmag17s.webp" alt="TRC Mags 17s">
+                            <div class="product-info"><h4>TRC Mags 17s</h4><div class="rating">⭐ 4.7 <span>(95)</span></div><div class="price-container"><span class="price">₱5500</span><span class="original-price">₱6000</span></div>
+                                <button class="btn-add-cart" onclick="addToCart('M1', 'TRC Mags 17s', 5500, 'images/TRCmag17s.webp')">Add to Cart</button>
+                                <button class="btn-buy-now" onclick="buyNow('M1', 'TRC Mags 17s', 5500, 'images/TRCmag17s.webp')">Buy Now</button>
+                            </div>
+                        </div>
+                        <div class="product-card" data-category="mags" data-price="6500">
+                            <div class="brand-badge">TRC</div>
+                            <img src="images/trcmagscnc.webp" alt="TRC Mags CNC">
+                            <div class="product-info"><h4>TRC Mags CNC</h4><div class="rating">⭐ 4.9 <span>(60)</span></div><div class="price-container"><span class="price">₱6500</span></div>
+                                <button class="btn-add-cart" onclick="addToCart('M2', 'TRC Mags CNC', 6500, 'images/trcmagscnc.webp')">Add to Cart</button>
+                                <button class="btn-buy-now" onclick="buyNow('M2', 'TRC Mags CNC', 6500, 'images/trcmagscnc.webp')">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="dashboard.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
+        <a href="motor-parts.html" class="active"><i class="fa-solid fa-gear"></i><span>Shop</span></a>
+        <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i><span>Cart</span></a>
+        <a href="orders.html"><i class="fa-solid fa-box"></i><span>Orders</span></a>
+        <a href="book-appointment.html"><i class="fa-regular fa-calendar-check"></i><span>Book</span></a>
+        <a href="mechanics.html"><i class="fa-solid fa-wrench"></i><span>Mech</span></a>
+        <a href="inventory.html"><i class="fa-solid fa-boxes-stacked"></i><span>Inv</span></a>
+        <a href="contact.html"><i class="fa-solid fa-envelope"></i><span>Contact</span></a>
+    </nav>
+
+    <script>
+        function toggleMenu() { document.getElementById('sidebar').classList.toggle('active'); }
+        function getCart() { return JSON.parse(localStorage.getItem('bayawCart')) || []; }
+        function saveCart(cart) { localStorage.setItem('bayawCart', JSON.stringify(cart)); updateCartBadge(); }
+        function updateCartBadge() { const totalQty = getCart().reduce((sum, item) => sum + item.qty, 0); document.querySelectorAll('.cart-badge').forEach(b => b.innerText = totalQty); }
+        
+        function showModal(title, message, onConfirm, yesText = "Yes", noText = "No") {
+            document.getElementById('modalTitle').innerText = title; document.getElementById('modalMessage').innerText = message;
+            const btnYes = document.getElementById('modalBtnYes'); const btnNo = document.getElementById('modalBtnNo'); btnYes.innerText = yesText; btnNo.innerText = noText;
+            const newYes = btnYes.cloneNode(true); const newNo = btnNo.cloneNode(true); btnYes.parentNode.replaceChild(newYes, btnYes); btnNo.parentNode.replaceChild(newNo, btnNo);
+            newYes.onclick = () => { closeModal(); if(onConfirm) onConfirm(); }; newNo.onclick = () => { closeModal(); };
+            document.getElementById('customModal').classList.add('active');
+        }
+        function closeModal() { document.getElementById('customModal').classList.remove('active'); }
+
+        function addToCart(id, name, price, image) {
+            let cart = getCart(); let item = cart.find(i => i.id === id);
+            if (item) item.qty += 1; else cart.push({ id, name, price, image, qty: 1 });
+            saveCart(cart);
+            showModal("Added to Cart!", `${name} has been added to your cart.`, () => window.location.href = 'cart.html', "Go to Cart", "Continue");
+        }
+        function buyNow(id, name, price, image) { saveCart([{ id, name, price, image, qty: 1 }]); window.location.href = 'cart.html'; }
+        
+        function filterParts(category, btn) {
+            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active');
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.style.display = (category === 'all' || card.getAttribute('data-category') === category) ? 'flex' : 'none';
+            });
+        }
+        function searchParts() {
+            let input = document.getElementById('partSearch').value.toLowerCase();
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.style.display = card.querySelector('h4').innerText.toLowerCase().includes(input) ? 'flex' : 'none';
+            });
+        }
+        function confirmLogout() { showModal("Logout", "Are you sure you want to log out?", () => { window.location.href = 'welcome.html'; }, "Yes, Logout", "Cancel"); }
+        
+        // === ITO NA YUNG CODE PARA GUMANA ANG SORT ===
+        function sortProducts() {
+            const sortValue = document.getElementById('sortSelect').value;
+            const grid = document.getElementById('partsGrid');
+            // Kunin lahat ng products at gawing Array
+            let products = Array.from(grid.getElementsByClassName('product-card'));
+
+            products.sort((a, b) => {
+                // Kunin ang data-price attribute na inilagay natin sa HTML
+                let priceA = parseFloat(a.getAttribute('data-price'));
+                let priceB = parseFloat(b.getAttribute('data-price'));
+
+                if (sortValue === 'low-high') {
+                    return priceA - priceB;
+                } else if (sortValue === 'high-low') {
+                    return priceB - priceA;
+                } else {
+                    return 0; // Popular (Balik sa dating ayos)
+                }
+            });
+
+            // I-clear ang laman ng grid tapos i-append ulit isa-isa base sa bagong ayos
+            grid.innerHTML = '';
+            products.forEach(product => {
+                grid.appendChild(product);
+            });
+        }
+
+        updateCartBadge();
+    </script>
+</body>
+</html>

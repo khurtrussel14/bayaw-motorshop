@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory - Bayaw</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="mobile-header">
+        <img src="images/logo.png" style="height: 35px;" alt="Logo">
+        <button class="menu-toggle" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
+    </div>
+
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="logo"><img src="images/logo.png" alt="Bayaw Motorshop"></div>
+            <ul class="nav-menu">
+                <li><a href="dashboard.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="motor-parts.html"><i class="fa-solid fa-gear"></i> Motor Parts</a></li>
+                <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i> My Cart <span class="cart-badge" id="cartCount">0</span></a></li>
+                <li><a href="orders.html"><i class="fa-solid fa-box"></i> My Orders</a></li>
+                <li><a href="book-appointment.html"><i class="fa-regular fa-calendar-check"></i> Book Appointment</a></li>
+                <li><a href="mechanics.html"><i class="fa-solid fa-wrench"></i> Mechanics</a></li>
+                <li><a href="inventory.html" class="active"><i class="fa-solid fa-boxes-stacked"></i> Inventory</a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact Us</a></li>
+            </ul>
+            <div class="user-section">
+                <div class="user-profile"><div class="avatar"><i class="fa-solid fa-user"></i></div><div><h4></h4><p>Customer</p></div></div>
+                <button class="logout-btn" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header"><h1>Inventory Management</h1><p>View all available stock and product information.</p></div>
+            
+            <div class="search-bar">
+                <input type="text" id="inventorySearch" placeholder="Search products..." onkeyup="searchInventory()">
+                <button><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+            </div>
+
+            <div class="inventory-table" id="inventoryTable">
+                <div class="table-row table-header">
+                    <div>Image</div><div>Product Name</div><div>Category</div><div>Stock</div><div>Price</div>
+                </div>
+                
+                <!-- 1. ACCESSORIES -->
+                <div class="table-row">
+                    <div><img src="images/TRCswingarm.jpg"></div><div>TRC Swing Arm</div><div>Accessories</div><div>10</div><div>₱3500</div>
+                </div>
+                <div class="table-row">
+                    <div><img src="images/UMARadiator.png"></div><div>UMA Radiator</div><div>Accessories</div><div>5</div><div>₱2500</div>
+                </div>
+                <div class="table-row">
+                    <div><img src="images/bomxdualtankbrakemaster.webp"></div><div>Bom X Dual Tank Brake Master</div><div>Accessories</div><div>8</div><div>₱1500</div>
+                </div>
+
+                <!-- 2. BRAKE SYSTEM -->
+                <div class="table-row">
+                    <div><img src="images/TRCbrakepads.jpg"></div><div>TRC Brake Pads</div><div>Brake System</div><div>20</div><div>₱450</div>
+                </div>
+                <div class="table-row">
+                    <div><img src="images/TRCdiscbrake.webp"></div><div>TRC Disc Brake</div><div>Brake System</div><div>15</div><div>₱2500</div>
+                </div>
+                <div class="table-row">
+                    <div><img src="images/brakefluid.webp"></div><div>Brake Fluid</div><div>Brake System</div><div>30</div><div>₱250</div>
+                </div>
+                <div class="table-row">
+                    <div><img src="images/TRCbrakemaster.webp"></div><div>TRC Brake Master</div><div>Brake System</div><div>12</div><div>₱1200</div>
+                </div>
+                <div class="table-row">
+                    <div><img src="images/trcbrakemasterwithoiltank.webp"></div><div>TRC Brake Master w/ Oil Tank</div><div>Brake System</div><div>7</div><div>₱1800</div>
+                </div>
+
+                <!-- 3. ENGINE -->
+                <div class="table-row">
+                    <div><img src="images/sparkplug.jpeg"></div><div>Spark Plug</div><div>Engine</div><div>50</div><div>₱200</div>
+                </div>
+                <div class="table-row">
+                    <div><img src="images/gasketcylinderhead.webp"></div><div>Gasket Cylinder Head</div><div>Engine</div><div>25</div><div>₱300</div>
+                </div>
+                <div class="table-row">
+                    <div><img src="images/pistonforwave110.webp"></div><div>Piston for Wave 110</div><div>Engine</div><div>10</div><div>₱850</div>
+                </div>
+
+                <!-- 4. TRANSMISSION -->
+                <div class="table-row">
+                    <div><img src="images/chainyamaha.webp"></div><div>Yamaha Chain</div><div>Transmission</div><div>15</div><div>₱600</div>
+                </div>
+                <div class="table-row">
+                    <div><img src="images/gearlever.webp"></div><div>Gear Lever</div><div>Transmission</div><div>8</div><div>₱350</div>
+                </div>
+
+                <!-- 5. SUSPENSION -->
+                <div class="table-row">
+                    <div><img src="images/trcrearshock.webp"></div><div>TRC Rear Shock</div><div>Suspension</div><div>10</div><div>₱3200</div>
+                </div>
+                <div class="table-row">
+                    <div><img src="images/bomxshock.webp"></div><div>Bom X Shock</div><div>Suspension</div><div>6</div><div>₱3800</div>
+                </div>
+                <div class="table-row">
+                    <div><img src="images/RCBSP800.jpg"></div><div>RCB SP800</div><div>Suspension</div><div>4</div><div>₱4500</div>
+                </div>
+
+                <!-- 6. TIRES -->
+                <div class="table-row">
+                    <div><img src="images/michelintires.webp"></div><div>Michelin Tires</div><div>Tires</div><div>12</div><div>₱2800</div>
+                </div>
+
+                <!-- 7. MAGS -->
+                <div class="table-row">
+                    <div><img src="images/TRCmag17s.webp"></div><div>TRC Mags 17s</div><div>Mags</div><div>5</div><div>₱5500</div>
+                </div>
+                <div class="table-row">
+                    <div><img src="images/trcmagscnc.webp"></div><div>TRC Mags CNC</div><div>Mags</div><div>3</div><div>₱6500</div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="dashboard.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
+        <a href="motor-parts.html"><i class="fa-solid fa-gear"></i><span>Shop</span></a>
+        <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i><span>Cart</span></a>
+        <a href="orders.html"><i class="fa-solid fa-box"></i><span>Orders</span></a>
+        <a href="book-appointment.html"><i class="fa-regular fa-calendar-check"></i><span>Book</span></a>
+        <a href="mechanics.html"><i class="fa-solid fa-wrench"></i><span>Mech</span></a>
+        <a href="inventory.html" class="active"><i class="fa-solid fa-boxes-stacked"></i><span>Inv</span></a>
+        <a href="contact.html"><i class="fa-solid fa-envelope"></i><span>Contact</span></a>
+    </nav>
+
+    <script>
+        function toggleMenu() { document.getElementById('sidebar').classList.toggle('active'); }
+        function updateCartBadge() { const cart = JSON.parse(localStorage.getItem('bayawCart')) || []; document.querySelectorAll('.cart-badge').forEach(b => b.innerText = cart.reduce((sum, item) => sum + item.qty, 0)); }
+        
+        function searchInventory() {
+            let input = document.getElementById('inventorySearch').value.toLowerCase();
+            let rows = document.querySelectorAll('#inventoryTable .table-row');
+            // Start at 1 para laktawan ang header
+            for(let i = 1; i < rows.length; i++) {
+                rows[i].style.display = rows[i].children[1].innerText.toLowerCase().includes(input) ? "" : "none";
+            }
+        }
+
+        function showModal(title, message, onConfirm, yesText = "Yes", noText = "No") {
+            document.getElementById('modalTitle').innerText = title; document.getElementById('modalMessage').innerText = message;
+            const btnYes = document.getElementById('modalBtnYes'); const btnNo = document.getElementById('modalBtnNo'); btnYes.innerText = yesText; btnNo.innerText = noText;
+            const newYes = btnYes.cloneNode(true); const newNo = btnNo.cloneNode(true); btnYes.parentNode.replaceChild(newYes, btnYes); btnNo.parentNode.replaceChild(newNo, btnNo);
+            newYes.onclick = () => { closeModal(); if(onConfirm) onConfirm(); }; newNo.onclick = () => { closeModal(); };
+            document.getElementById('customModal').classList.add('active');
+        }
+        function closeModal() { document.getElementById('customModal').classList.remove('active'); }
+
+        function confirmLogout() { showModal("Logout", "Are you sure you want to log out?", () => { window.location.href = 'welcome.html'; }, "Yes, Logout", "Cancel"); }
+        
+        updateCartBadge();
+    </script>
+</body>
+</html>

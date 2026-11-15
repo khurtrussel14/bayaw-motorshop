@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Bayaw Motorshop</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="login-body">
+
+    <!-- CUSTOM MODAL / IN-BOX MESSAGE -->
+    <div class="modal-overlay" id="customModal">
+        <div class="modal-box">
+            <h3>Account Created!</h3>
+            <p>Your account has been successfully created. Welcome to Bayaw Motorshop!</p>
+            <div class="modal-actions">
+                <!-- Dito papunta sa dashboard -->
+                <button class="btn-primary" onclick="window.location.href='dashboard.html'">Go to Dashboard</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="login-container" style="max-width: 480px;">
+        <div class="logo"><img src="images/logo.png" alt="Bayaw Motorshop"></div>
+        
+        <form id="signupForm">
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" placeholder="Enter your full name" required>
+            </div>
+            
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" placeholder="Enter your email" required>
+            </div>
+            
+            <div class="input-group">
+                <label>Phone Number</label>
+                <input type="tel" placeholder="e.g. 09123456789" required>
+            </div>
+            
+            <div class="input-group">
+                <label>Password</label>
+                <div class="password-wrapper">
+                    <input type="password" id="signupPassword" placeholder="Create a strong password" required>
+                    <i class="fa-solid fa-eye toggle-password" onclick="togglePassword('signupPassword', this)"></i>
+                </div>
+            </div>
+
+            <div class="form-options" style="justify-content: flex-start; margin-top: 15px;">
+                <label><input type="checkbox" required> I agree to the Terms & Conditions</label>
+            </div>
+            
+            <button type="submit" class="btn-primary">CREATE ACCOUNT</button>
+        </form>
+        
+        <div class="login-links">
+            Already have an account? <a href="login.html">Login</a>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword(inputId, icon) {
+            const input = document.getElementById(inputId);
+            if (input.type === "password") { input.type = "text"; icon.classList.replace("fa-eye", "fa-eye-slash"); } 
+            else { input.type = "password"; icon.classList.replace("fa-eye-slash", "fa-eye"); }
+        }
+        
+        // Pipigilan ang pag-reload at ilalabas ang Custom Modal
+        document.getElementById('signupForm').addEventListener('submit', function(e) { 
+            e.preventDefault(); 
+            document.getElementById('customModal').classList.add('active');
+        });
+    </script>
+</body>
+</html>

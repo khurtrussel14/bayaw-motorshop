@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Bayaw</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="mobile-header"><img src="images/logo.png" style="height: 35px;"><button class="menu-toggle" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button></div>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="logo"><img src="images/logo.png" alt="Bayaw Motorshop"></div>
+            <ul class="nav-menu">
+                <li><a href="dashboard.html" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="motor-parts.html"><i class="fa-solid fa-gear"></i> Motor Parts</a></li>
+                <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i> My Cart <span class="cart-badge" id="cartCount">0</span></a></li>
+                <li><a href="orders.html"><i class="fa-solid fa-box"></i> My Orders</a></li>
+                <li><a href="book-appointment.html"><i class="fa-regular fa-calendar-check"></i> Book Appointment</a></li>
+                <li><a href="mechanics.html"><i class="fa-solid fa-wrench"></i> Mechanics</a></li>
+                <li><a href="inventory.html"><i class="fa-solid fa-boxes-stacked"></i> Inventory</a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact Us</a></li>
+            </ul>
+            <div class="user-section">
+                <div class="user-profile"><div class="avatar"><i class="fa-solid fa-user"></i></div><div><h4></h4><p>Customer</p></div></div>
+                <button class="logout-btn" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header" style="border-left: none; background: var(--gradient-dark); color: white;">
+                <h1 style="color: white;">Welcome back, Ian!</h1><p style="color: #9CA3AF;">What are we fixing today?</p>
+            </div>
+            
+            <div class="search-bar"><input type="text" placeholder="Search parts, services, or anything..."><button><i class="fa-solid fa-magnifying-glass"></i> Search</button></div>
+            
+            <div class="cards-grid">
+                <div class="feature-card" onclick="window.location.href='motor-parts.html'"><div class="icon">⚙️</div><h3>Motor Parts</h3><p>Quality parts for your ride</p></div>
+                <div class="feature-card" onclick="window.location.href='book-appointment.html'"><div class="icon">🛠️</div><h3>Repair Service</h3><p>Expert care for your motorcycle</p></div>
+                <div class="feature-card" onclick="window.location.href='mechanics.html'"><div class="icon">👨‍🔧</div><h3>Expert Mechanics</h3><p>Skilled and Trusted technicians</p></div>
+                <div class="feature-card" onclick="window.location.href='motor-parts.html'"><div class="icon">⚡</div><h3>Fast & Reliable</h3><p>Get back on the road</p></div>
+            </div>
+
+            <!-- DITO LALABAS ANG ORDERS AT APPOINTMENTS -->
+            <h2 class="section-title" style="margin-top: 30px;">Recent Orders <a href="orders.html" style="font-size:14px; color:var(--primary-red); text-decoration:none;">View All</a></h2>
+            <div id="dashboardOrders" class="dashboard-widget-container"></div>
+
+            <h2 class="section-title" style="margin-top: 30px;">Upcoming Appointments</h2>
+            <div id="dashboardAppointments" class="dashboard-widget-container"></div>
+
+            <h2 class="section-title" style="margin-top: 30px;">Featured Motor Parts <a href="motor-parts.html" style="font-size:14px; color:var(--primary-red); text-decoration:none;">View All</a></h2>
+            <div class="product-grid">
+                <div class="product-card"><img src="images/trcrearshock.webp" style="object-fit:cover; height:180px;"><div class="product-info"><h4>TRC Rear Shock</h4><div class="price">₱3200</div></div></div>
+                <div class="product-card"><img src="images/TRCdiscbrake.webp" style="object-fit:cover; height:180px;"><div class="product-info"><h4>TRC Disc Brake</h4><div class="price">₱2500</div></div></div>
+                <div class="product-card"><img src="images/bomxshock.webp" style="object-fit:cover; height:180px;"><div class="product-info"><h4>Bom X Shock</h4><div class="price">₱3800</div></div></div>
+                <div class="product-card"><img src="images/trcmagscnc.webp" style="object-fit:cover; height:180px;"><div class="product-info"><h4>TRC Mags CNC</h4><div class="price">₱6500</div></div></div>
+            </div>
+        </main>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="active"><i class="fa-solid fa-house"></i><span>Home</span></a>
+        <a href="motor-parts.html"><i class="fa-solid fa-gear"></i><span>Shop</span></a>
+        <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i><span>Cart</span></a>
+        <a href="orders.html"><i class="fa-solid fa-box"></i><span>Orders</span></a>
+        <a href="book-appointment.html"><i class="fa-regular fa-calendar-check"></i><span>Book</span></a>
+        <a href="mechanics.html"><i class="fa-solid fa-wrench"></i><span>Mech</span></a>
+        <a href="inventory.html"><i class="fa-solid fa-boxes-stacked"></i><span>Inv</span></a>
+        <a href="contact.html"><i class="fa-solid fa-envelope"></i><span>Contact</span></a>
+    </nav>
+
+    <script>
+        function toggleMenu() { document.getElementById('sidebar').classList.toggle('active'); }
+        function updateCartBadge() { const cart = JSON.parse(localStorage.getItem('bayawCart')) || []; document.querySelectorAll('.cart-badge').forEach(b => b.innerText = cart.reduce((sum, item) => sum + item.qty, 0)); }
+        
+        function renderDashboardWidgets() {
+            // 1. Render Orders
+            const orders = JSON.parse(localStorage.getItem('bayawOrders')) || [];
+            const ordersContainer = document.getElementById('dashboardOrders');
+            if(orders.length === 0) {
+                ordersContainer.innerHTML = `<p style="color: var(--text-muted); font-size: 14px;">No recent orders yet.</p>`;
+            } else {
+                let html = '';
+                // Kunin ang huling 2 orders
+                orders.slice(-2).reverse().forEach(order => {
+                    html += `
+                        <div class="widget-card">
+                            <div class="widget-header"><span><b>${order.orderId}</b></span><span class="status-chip-small">${order.status}</span></div>
+                            <div class="widget-body">
+                                <p>Total: <b>₱${order.total.toLocaleString()}</b></p>
+                                <p><span>${order.date}</span></p>
+                            </div>
+                        </div>
+                    `;
+                });
+                ordersContainer.innerHTML = html;
+            }
+
+            // 2. Render Appointments
+            const appts = JSON.parse(localStorage.getItem('bayawAppointments')) || [];
+            const apptsContainer = document.getElementById('dashboardAppointments');
+            if(appts.length === 0) {
+                apptsContainer.innerHTML = `<p style="color: var(--text-muted); font-size: 14px;">No upcoming appointments.</p>`;
+            } else {
+                let html = '';
+                // Kunin ang huling 2 appointments
+                appts.slice(-2).reverse().forEach(appt => {
+                    html += `
+                        <div class="widget-card">
+                            <div class="widget-header"><span><b>${appt.id}</b></span><span class="status-chip-small success">Confirmed</span></div>
+                            <div class="widget-body">
+                                <p><b>${appt.service}</b> with ${appt.mech}</p>
+                                <p><span>${appt.date} at ${appt.time}</span></p>
+                            </div>
+                        </div>
+                    `;
+                });
+                apptsContainer.innerHTML = html;
+            }
+        }
+        
+        updateCartBadge();
+        renderDashboardWidgets();
+    </script>
+</body>
+</html>

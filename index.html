@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Bayaw Motorshop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- NAKAPASOK NA ANG CSS DITO PARA IWAS CONFLICT -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(180deg, #111827 0%, #0B0F19 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        .welcome-container {
+            max-width: 450px;
+            width: 100%;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .welcome-container img {
+            width: 220px;
+            max-height: 100px;
+            object-fit: contain;
+            margin-bottom: 30px;
+        }
+
+        .welcome-container h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .welcome-container p {
+            color: #9CA3AF;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        /* MOVING GRADIENT ANIMATION */
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .btn-get-started {
+            display: inline-block;
+            padding: 16px 45px;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 18px;
+            
+            /* ITO ANG MOVING GRADIENT */
+            background: linear-gradient(270deg, #E11D48, #BE123C, #9F1239, #E11D48);
+            background-size: 300% 300%;
+            animation: gradientMove 3s ease infinite;
+            
+            box-shadow: 0 4px 15px rgba(225, 29, 72, 0.4);
+            transition: 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-get-started:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(225, 29, 72, 0.6);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="welcome-container">
+        <img src="images/logo.png" alt="Bayaw Motorshop Logo">
+        
+        <h1>Premium Motor Parts & Repairs</h1>
+        
+        <p>Get high-quality parts for your ride and book expert mechanics in just a few clicks.</p>
+        
+        <!-- Dito papunta sa Login page -->
+        <a href="login.html" class="btn-get-started">
+            Get Started <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i>
+        </a>
+    </div>
+
+</body>
+</html>

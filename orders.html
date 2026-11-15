@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - Bayaw</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="modal-overlay" id="customModal"><div class="modal-box"><h3 id="modalTitle">Title</h3><p id="modalMessage">Message</p><div class="modal-actions"><button class="btn-outline" id="modalBtnNo" onclick="closeModal()">No</button><button class="btn-primary" id="modalBtnYes">Yes</button></div></div></div>
+    <div class="mobile-header"><img src="images/logo.png" style="height: 35px;"><button class="menu-toggle" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button></div>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="logo"><img src="images/logo.png" alt="Bayaw Motorshop"></div>
+            <ul class="nav-menu">
+                <li><a href="dashboard.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="motor-parts.html"><i class="fa-solid fa-gear"></i> Motor Parts</a></li>
+                <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i> My Cart <span class="cart-badge" id="cartCount">0</span></a></li>
+                <li><a href="orders.html" class="active"><i class="fa-solid fa-box"></i> My Orders</a></li>
+                <li><a href="book-appointment.html"><i class="fa-regular fa-calendar-check"></i> Book Appointment</a></li>
+                <li><a href="mechanics.html"><i class="fa-solid fa-wrench"></i> Mechanics</a></li>
+                <li><a href="inventory.html"><i class="fa-solid fa-boxes-stacked"></i> Inventory</a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact Us</a></li>
+            </ul>
+            <div class="user-section"><div class="user-profile"><div class="avatar"><i class="fa-solid fa-user"></i></div><div><h4></h4><p>Customer</p></div></div><button class="logout-btn" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</button></div>
+        </aside>
+        <main class="main-content">
+            <div class="page-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                <div><h1>My Orders</h1><p>Track your recent purchases</p></div>
+                <button class="btn-outline" onclick="confirmClearOrders()" style="color: var(--primary-red); border-color: var(--primary-red);"><i class="fa-solid fa-trash"></i> Clear</button>
+            </div>
+            <div id="ordersContainer"></div>
+        </main>
+    </div>
+    <nav class="bottom-nav">
+        <a href="dashboard.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
+        <a href="motor-parts.html"><i class="fa-solid fa-gear"></i><span>Shop</span></a>
+        <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i><span>Cart</span></a>
+        <a href="orders.html" class="active"><i class="fa-solid fa-box"></i><span>Orders</span></a>
+        <a href="book-appointment.html"><i class="fa-regular fa-calendar-check"></i><span>Book</span></a>
+        <a href="mechanics.html"><i class="fa-solid fa-wrench"></i><span>Mech</span></a>
+        <a href="inventory.html"><i class="fa-solid fa-boxes-stacked"></i><span>Inv</span></a>
+        <a href="contact.html"><i class="fa-solid fa-envelope"></i><span>Contact</span></a>
+    </nav>
+    <script>
+        function toggleMenu() { document.getElementById('sidebar').classList.toggle('active'); }
+        function updateCartBadge() { const cart = JSON.parse(localStorage.getItem('bayawCart')) || []; document.querySelectorAll('.cart-badge').forEach(b => b.innerText = cart.reduce((sum, item) => sum + item.qty, 0)); }
+        function showModal(title, message, onConfirm, yesText = "Yes", noText = "No") {
+            document.getElementById('modalTitle').innerText = title; document.getElementById('modalMessage').innerText = message;
+            const btnYes = document.getElementById('modalBtnYes'); const btnNo = document.getElementById('modalBtnNo'); btnYes.innerText = yesText; btnNo.innerText = noText;
+            const newYes = btnYes.cloneNode(true); const newNo = btnNo.cloneNode(true); btnYes.parentNode.replaceChild(newYes, btnYes); btnNo.parentNode.replaceChild(newNo, btnNo);
+            newYes.onclick = () => { closeModal(); if(onConfirm) onConfirm(); }; newNo.onclick = () => { closeModal(); };
+            document.getElementById('customModal').classList.add('active');
+        }
+        function closeModal() { document.getElementById('customModal').classList.remove('active'); }
+        function renderOrders() {
+            const orders = JSON.parse(localStorage.getItem('bayawOrders')) || []; const container = document.getElementById('ordersContainer');
+            if (orders.length === 0) { container.innerHTML = `<div class="empty-cart"><i class="fa-solid fa-box-open"></i><h2>No orders yet</h2><p>You haven't placed any orders.</p></div>`; return; }
+            let html = '';
+            orders.slice().reverse().forEach(order => {
+                html += `<div class="order-card"><div class="order-header"><span>ID: <b>${order.orderId}</b></span><span>Date: ${order.date}</span><span style="color: #10B981;">Status: ${order.status}</span></div><div class="order-body">`;
+                order.items.forEach(item => { let imgSrc = item.image ? item.image : 'images/logo.png'; html += `<div class="order-item"><img src="${imgSrc}" onerror="this.src='images/logo.png'"><div style="flex-grow: 1;"><h4 style="font-size: 16px;">${item.name}</h4><p style="font-size: 14px; color: var(--text-muted);">Qty: ${item.qty} x ₱${item.price.toLocaleString()}</p></div><div style="font-weight: 700;">₱${(item.qty * item.price).toLocaleString()}</div></div>`; });
+                html += `</div><div class="order-footer"><span>Total: ₱${order.total.toLocaleString()}</span><button class="btn-primary" style="width: auto; padding: 8px 15px; font-size: 13px;" onclick="window.location.href='track-order.html'">Track</button></div></div>`;
+            });
+            container.innerHTML = html;
+        }
+        function confirmClearOrders() { showModal("Clear History", "Sigurado ka bang gusto mong burahin lahat ng order history mo?", () => { localStorage.removeItem('bayawOrders'); renderOrders(); }, "Yes", "Cancel"); }
+        updateCartBadge(); renderOrders();
+    </script>
+</body>
+</html>

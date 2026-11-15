@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Bayaw</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="modal-overlay" id="customModal">
+        <div class="modal-box"><h3 id="modalTitle">Message Sent!</h3><p id="modalMessage">Thank you for reaching out. We will get back to you shortly.</p><div class="modal-actions"><button class="btn-primary" onclick="closeModal()">Okay</button></div></div>
+    </div>
+
+    <div class="mobile-header"><img src="images/logo.png" style="height: 35px;"><button class="menu-toggle" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button></div>
+    
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="logo"><img src="images/logo.png" alt="Bayaw Motorshop"></div>
+            <ul class="nav-menu">
+                <li><a href="dashboard.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="motor-parts.html"><i class="fa-solid fa-gear"></i> Motor Parts</a></li>
+                <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i> My Cart <span class="cart-badge" id="cartCount">0</span></a></li>
+                <li><a href="orders.html"><i class="fa-solid fa-box"></i> My Orders</a></li>
+                <li><a href="book-appointment.html"><i class="fa-regular fa-calendar-check"></i> Book Appointment</a></li>
+                <li><a href="mechanics.html"><i class="fa-solid fa-wrench"></i> Mechanics</a></li>
+                <li><a href="inventory.html"><i class="fa-solid fa-boxes-stacked"></i> Inventory</a></li>
+                <li><a href="contact.html" class="active"><i class="fa-solid fa-envelope"></i> Contact Us</a></li>
+            </ul>
+            <div class="user-section">
+                <div class="user-profile"><div class="avatar"><i class="fa-solid fa-user"></i></div><div><h4></h4><p>Customer</p></div></div>
+                <button class="logout-btn" onclick="window.location.href='index.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header"><h1>Get in Touch</h1><p>We're here to help. Reach out to us anytime</p></div>
+            <div class="layout-two-col">
+                <div class="services-list">
+                    <p style="margin-bottom: 15px;">📍 <b>Address:</b><br>Palacpalac, Pozorrubio, Pangasinan</p>
+                    <p style="margin-bottom: 15px;">📞 <b>Phone:</b><br>+63099416211</p>
+                    <p style="margin-bottom: 15px;">✉️ <b>Email:</b><br>bayawmotorshop@gmail.com</p>
+                    <p>📝 <b>Business Hours:</b><br>Mon-Sat 8:00 AM-5:00 PM</p>
+                </div>
+                <div>
+                    <h3 style="margin-bottom: 15px;">Send Us a Message</h3>
+                    <form id="contactForm">
+                        <div class="form-group"><label>Name</label><input type="text" placeholder="Your name" required></div>
+                        <div class="form-group"><label>Email</label><input type="email" placeholder="Your email" required></div>
+                        <div class="form-group"><label>Message</label><textarea placeholder="Type your message..." required></textarea></div>
+                        <button type="submit" class="btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="dashboard.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
+        <a href="motor-parts.html"><i class="fa-solid fa-gear"></i><span>Shop</span></a>
+        <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i><span>Cart</span></a>
+        <a href="orders.html"><i class="fa-solid fa-box"></i><span>Orders</span></a>
+        <a href="book-appointment.html"><i class="fa-regular fa-calendar-check"></i><span>Book</span></a>
+        <a href="mechanics.html"><i class="fa-solid fa-wrench"></i><span>Mech</span></a>
+        <a href="inventory.html"><i class="fa-solid fa-boxes-stacked"></i><span>Inv</span></a>
+        <a href="contact.html" class="active"><i class="fa-solid fa-envelope"></i><span>Contact</span></a>
+    </nav>
+
+    <script>
+        function toggleMenu() { document.getElementById('sidebar').classList.toggle('active'); }
+        function updateCartBadge() { const cart = JSON.parse(localStorage.getItem('bayawCart')) || []; document.querySelectorAll('.cart-badge').forEach(b => b.innerText = cart.reduce((sum, item) => sum + item.qty, 0)); }
+        
+        function closeModal() { document.getElementById('customModal').classList.remove('active'); }
+        function showModal(title, message) {
+            document.getElementById('modalTitle').innerText = title; document.getElementById('modalMessage').innerText = message;
+            document.getElementById('customModal').classList.add('active');
+        }
+        function confirmLogout() { showModal("Logout", "Are you sure you want to log out?"); /* Simplified for now */ }
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('customModal').classList.add('active');
+            this.reset();
+        });
+        
+        updateCartBadge();
+    </script>
+</body>
+</html>
